@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Set-PnPTeamsTeam | PnP PowerShell ">
     <meta name="generator" content="docfx 2.51.0.0">
-    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work against Microsoft 365.">
+    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work with Microsoft 365.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
@@ -77,6 +77,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/powershell/blob/dev/documentation/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
@@ -97,14 +98,27 @@
  [-AllowOwnerDeleteMessages &lt;Boolean&gt;] [-AllowStickersAndMemes &lt;Boolean&gt;] [-AllowTeamMentions &lt;Boolean&gt;]
  [-AllowUserDeleteMessages &lt;Boolean&gt;] [-AllowUserEditMessages &lt;Boolean&gt;]
  [-GiphyContentRating &lt;TeamGiphyContentRating&gt;] [-ShowInTeamsSearchAndSuggestions &lt;Boolean&gt;]
- [-Classification &lt;String&gt;] [-ByPassPermissionCheck] [&lt;CommonParameters&gt;]
+ [-Classification &lt;String&gt;]  [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
+<p>Allows to update team settings.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<pre><code class="lang-powershell">Set-PnPTeamsChannel -Team &quot;MyTeam&quot; -DisplayName &quot;My Team&quot;
+<pre><code class="lang-powershell">Set-PnPTeamsTeam -Identity 'MyTeam' -DisplayName 'My Team'
 </code></pre>
-<p>Updates the team called 'MyTeam' to have the display name set to 'My Team'</p>
+<p>Updates the team called 'MyTeam' to have the display name set to 'My Team'.</p>
+<h3 id="example-2">EXAMPLE 2</h3>
+<pre><code class="lang-powershell">Set-PnPTeamsTeam -Identity &quot;baba9192-55be-488a-9fb7-2e2e76edbef2&quot; -Visibility Public
+</code></pre>
+<p>Updates the team by using id to have the visibility Public.</p>
+<h3 id="example-3">EXAMPLE 3</h3>
+<pre><code class="lang-powershell">Set-PnPTeamsTeam -Identity &quot;My Team&quot; -AllowTeamMentions $false -AllowChannelMentions $true -AllowDeleteChannels $false
+</code></pre>
+<p>Updates the team 'My Team' to disallow Team @mentions, allow Channel @mentions and disallow members from deleting channels.</p>
+<h3 id="example-4">EXAMPLE 4</h3>
+<pre><code class="lang-powershell">Set-PnPTeamsTeam -Identity &quot;My Team&quot; -GiphyContentRating Moderate
+</code></pre>
+<p>Updates the team 'My Team' to have a Moderate level of sensitivity for giphy usage.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-allowaddremoveapps">-AllowAddRemoveApps</h3>
 <p>Boolean value that determines whether or not members (not only owners) are allowed to add apps to the team.</p>
@@ -271,17 +285,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
-<h3 id="-bypasspermissioncheck">-ByPassPermissionCheck</h3>
-<p>Allows the check for required permissions in the access token to be bypassed when set to $true</p>
-<pre><code class="lang-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
 <h3 id="-classification">-Classification</h3>
 <pre><code class="lang-yaml">Type: String
 Parameter Sets: (All)
@@ -388,5 +391,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

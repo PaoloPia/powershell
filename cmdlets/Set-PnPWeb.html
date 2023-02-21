@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Set-PnPWeb | PnP PowerShell ">
     <meta name="generator" content="docfx 2.51.0.0">
-    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work against Microsoft 365.">
+    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work with Microsoft 365.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
@@ -77,6 +77,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/powershell/blob/dev/documentation/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
@@ -88,7 +89,7 @@
 <pre><code class="lang-powershell">Set-PnPWeb [-SiteLogoUrl &lt;String&gt;] [-AlternateCssUrl &lt;String&gt;] [-Title &lt;String&gt;] [-Description &lt;String&gt;]
  [-MasterUrl &lt;String&gt;] [-CustomMasterUrl &lt;String&gt;] [-QuickLaunchEnabled] [-MembersCanShare] [-NoCrawl]
  [-HeaderLayout &lt;HeaderLayoutType&gt;] [-HeaderEmphasis &lt;SPVariantThemeType&gt;] [-NavAudienceTargetingEnabled]
- [-MegaMenuEnabled] [-DisablePowerAutomate] [-CommentsOnSitePagesDisabled] [-Web &lt;WebPipeBind&gt;]
+ [-MegaMenuEnabled] [-DisablePowerAutomate] [-CommentsOnSitePagesDisabled] [-HideTitleInHeader]
  [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
@@ -103,6 +104,10 @@
 </code></pre>
 <p>Hides the quick launch from being shown in the current web</p>
 <h3 id="example-3">EXAMPLE 3</h3>
+<pre><code class="lang-powershell">Set-PnPWeb -HeaderEmphasis Strong -HeaderLayout Compact
+</code></pre>
+<p>Sets the header style in the current web.</p>
+<h3 id="example-4">EXAMPLE 4</h3>
 <pre><code class="lang-powershell">Set-PnPWeb -NoCrawl:$true
 </code></pre>
 <p>Prevents the current web from being returned in search results</p>
@@ -174,6 +179,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-headeremphasis">-HeaderEmphasis</h3>
+<p>Defines the tone of color used for the bar shown at the top of the site with the site name and logo</p>
 <pre><code class="lang-yaml">Type: SPVariantThemeType
 Parameter Sets: (All)
 Accepted values: None, Neutral, Soft, Strong
@@ -185,6 +191,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-headerlayout">-HeaderLayout</h3>
+<p>Defines the layout type of the site header</p>
 <pre><code class="lang-yaml">Type: HeaderLayoutType
 Parameter Sets: (All)
 Accepted values: None, Standard, Compact, Minimal, Extended
@@ -218,7 +225,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-memberscanshare">-MembersCanShare</h3>
-<p>Indicates if members of this site can share the site and individual sites with others ($true) or only owners can do this ($false)</p>
+<p>Indicates if members of this site can share the site and its content with others ($true) or only owners can do this ($false)</p>
 <pre><code class="lang-yaml">Type: SwitchParameter
 Parameter Sets: (All)
 
@@ -283,9 +290,10 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
-<h3 id="-web">-Web</h3>
-<p>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</p>
-<pre><code class="lang-yaml">Type: WebPipeBind
+<h3 id="-hidetitleinheader">-HideTitleInHeader</h3>
+<p>Toggle the title visibility in the header.</p>
+<p>Set -HideTitleInHeader:$false to show the header</p>
+<pre><code class="lang-yaml">Type: SwitchParameter
 Parameter Sets: (All)
 
 Required: False
@@ -322,5 +330,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Save-PnPTenantTemplate | PnP PowerShell ">
     <meta name="generator" content="docfx 2.51.0.0">
-    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work against Microsoft 365.">
+    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work with Microsoft 365.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
@@ -77,28 +77,30 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/powershell/blob/dev/documentation/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                     <h1 id="save-pnptenanttemplate">Save-PnPTenantTemplate</h1>
 
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Saves a PnP provisioning hierarchy to the file system</p>
+<p>Saves a PnP provisioning hierarchy to the file system.</p>
 <h2 id="syntax">SYNTAX</h2>
 <pre><code class="lang-powershell">Save-PnPTenantTemplate -Template &lt;ProvisioningHierarchyPipeBind&gt; [-Out] &lt;String&gt;
  [-Schema &lt;XMLPnPSchemaVersion&gt;] [-Force] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
+<p>This cmdlet saves the tenant template for provisioning hierarchy to the file system in the latest or specified schema.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <pre><code class="lang-powershell">Save-PnPTenantTemplate -Template template.xml -Out .\tenanttemplate.pnp
 </code></pre>
-<p>Saves a PnP tenant template to the file system</p>
+<p>Saves a PnP tenant template to the file system.</p>
 <h3 id="example-2">EXAMPLE 2</h3>
 <pre><code class="lang-powershell">$template = Read-PnPTenantTemplate -Path template.xml
 Save-PnPTenantTemplate -Template $template -Out .\template.pnp
 </code></pre>
-<p>Saves a PnP tenant template to the file system as a PnP file. The schema used will the latest released schema when creating the PnP file regardless of the original schema</p>
+<p>Saves a PnP tenant template to the file system as a PnP file. The schema used will be the latest released schema when creating the PnP file regardless of the original schema.</p>
 <h3 id="example-3">EXAMPLE 3</h3>
 <pre><code class="lang-powershell">$template = Read-PnPTenantTemplate -Path template.xml
 Save-PnPTenantTemplate -Template $template -Out .\template.pnp -Schema V202002
@@ -182,5 +184,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

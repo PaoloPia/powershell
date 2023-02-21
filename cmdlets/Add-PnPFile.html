@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Add-PnPFile | PnP PowerShell ">
     <meta name="generator" content="docfx 2.51.0.0">
-    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work against Microsoft 365.">
+    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work with Microsoft 365.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
@@ -77,6 +77,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/powershell/blob/dev/documentation/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
@@ -86,16 +87,22 @@
 <p>Uploads a file to Web</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="upload-file">Upload file</h3>
-<pre><code class="lang-powershell">Add-PnPFile -Path &lt;String&gt; -Folder &lt;String&gt; [-NewFileName &lt;String&gt;] [-Checkout] [-CheckInComment &lt;String&gt;]
+<pre><code class="lang-powershell">Add-PnPFile -Path &lt;String&gt; -Folder &lt;FolderPipeBind&gt; [-NewFileName &lt;String&gt;] [-Checkout] [-CheckInComment &lt;String&gt;] [-CheckinType &lt;CheckinType&gt;]
  [-Approve] [-ApproveComment &lt;String&gt;] [-Publish] [-PublishComment &lt;String&gt;] [-UseWebDav] [-Values &lt;Hashtable&gt;]
- [-ContentType &lt;ContentTypePipeBind&gt;] [-Web &lt;WebPipeBind&gt;] [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
+ [-ContentType &lt;ContentTypePipeBind&gt;] [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h3 id="upload-file-from-stream">Upload file from stream</h3>
-<pre><code class="lang-powershell">Add-PnPFile -Folder &lt;String&gt; -FileName &lt;String&gt; -Stream &lt;Stream&gt; [-Checkout] [-CheckInComment &lt;String&gt;]
+<pre><code class="lang-powershell">Add-PnPFile -Folder &lt;FolderPipeBind&gt; -FileName &lt;String&gt; -Stream &lt;Stream&gt; [-Checkout] [-CheckInComment &lt;String&gt;] [-CheckinType &lt;CheckinType&gt;]
  [-Approve] [-ApproveComment &lt;String&gt;] [-Publish] [-PublishComment &lt;String&gt;] [-UseWebDav] [-Values &lt;Hashtable&gt;]
- [-ContentType &lt;ContentTypePipeBind&gt;] [-Web &lt;WebPipeBind&gt;] [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
+ [-ContentType &lt;ContentTypePipeBind&gt;] [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+<h3 id="create-or-update-file-from-text">Create or update file from text</h3>
+<pre><code class="lang-powershell">Add-PnPFile -Folder &lt;FolderPipeBind&gt; -FileName &lt;String&gt; -Content &lt;text&gt; [-Checkout] [-CheckInComment &lt;String&gt;] [-CheckinType &lt;CheckinType&gt;]
+ [-Approve] [-ApproveComment &lt;String&gt;] [-Publish] [-PublishComment &lt;String&gt;] [-UseWebDav] [-Values &lt;Hashtable&gt;]
+ [-ContentType &lt;ContentTypePipeBind&gt;] [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
+<p>This cmdlet uploads a local file, file from a stream or plain text to the specified folder.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <pre><code class="lang-powershell">Add-PnPFile -Path c:\temp\company.master -Folder &quot;_catalogs/masterpage&quot;
@@ -125,6 +132,10 @@
 <pre><code class="lang-powershell">Add-PnPFile -Path sample.docx -Folder &quot;Documents&quot; -NewFileName &quot;differentname.docx&quot;
 </code></pre>
 <p>This will upload a local file sample.docx to the Documents folder giving it the filename differentname.docx on SharePoint</p>
+<h3 id="example-8">EXAMPLE 8</h3>
+<pre><code class="lang-powershell">Add-PnPFile -FileName sample.txt -Folder &quot;Shared Documents&quot; -Content '{ &quot;Test&quot;: &quot;Value&quot; }'
+</code></pre>
+<p>This will create a file sample.docx in the Documents library inserting the provided plain text into it. If a similarly file already exists at this location, its contents will be overwritten.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-approve">-Approve</h3>
 <p>Will auto approve the uploaded file</p>
@@ -156,6 +167,17 @@ Parameter Sets: (All)
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-checkintype">-CheckinType</h3>
+<p>Specifies the type of check-in for a file.</p>
+<pre><code class="lang-yaml">Type: Enum (Microsoft.SharePoint.Client.CheckinType)
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: MinorCheckIn
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
@@ -205,7 +227,7 @@ Accept wildcard characters: False
 </code></pre>
 <h3 id="-folder">-Folder</h3>
 <p>The destination folder in the site</p>
-<pre><code class="lang-yaml">Type: String
+<pre><code class="lang-yaml">Type: FolderPipeBind
 Parameter Sets: (All)
 
 Required: True
@@ -279,6 +301,17 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
+<h3 id="-content">-Content</h3>
+<p>Content to add to the file to create or overwrite on SharePoint. It will blindly overwrite the contents of the file if it already exists.</p>
+<pre><code class="lang-yaml">Type: String
+Parameter Sets: ASTEXT
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
 <h3 id="-values">-Values</h3>
 <p>Use the internal names of the fields when specifying field names.</p>
 <p>Single line of text: -Values @{&quot;Title&quot; = &quot;Title New&quot;}</p>
@@ -301,17 +334,6 @@ Accept wildcard characters: False
 <p>Managed Metadata (multiple values with ids of terms): -Values @{&quot;MetadataField&quot; = &quot;fe40a95b-2144-4fa2-b82a-0b3d0299d818&quot;,&quot;52d88107-c2a8-4bf0-adfa-04bc2305b593&quot;}</p>
 <p>Hyperlink or Picture: -Values @{&quot;Hyperlink&quot; = &quot;https://github.com/OfficeDev/, OfficePnp&quot;}</p>
 <pre><code class="lang-yaml">Type: Hashtable
-Parameter Sets: (All)
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-web">-Web</h3>
-<p>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</p>
-<pre><code class="lang-yaml">Type: WebPipeBind
 Parameter Sets: (All)
 
 Required: False
@@ -348,5 +370,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

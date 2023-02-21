@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Set-PnPSearchConfiguration | PnP PowerShell ">
     <meta name="generator" content="docfx 2.51.0.0">
-    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work against Microsoft 365.">
+    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work with Microsoft 365.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
@@ -77,43 +77,45 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/powershell/blob/dev/documentation/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                     <h1 id="set-pnpsearchconfiguration">Set-PnPSearchConfiguration</h1>
 
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Sets the search configuration</p>
+<p>Sets the search configuration.</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="config">Config</h3>
-<pre><code class="lang-powershell">Set-PnPSearchConfiguration -Configuration &lt;String&gt; [-Scope &lt;SearchConfigurationScope&gt;] [-Web &lt;WebPipeBind&gt;]
+<pre><code class="lang-powershell">Set-PnPSearchConfiguration -Configuration &lt;String&gt; [-Scope &lt;SearchConfigurationScope&gt;] 
  [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h3 id="path">Path</h3>
-<pre><code class="lang-powershell">Set-PnPSearchConfiguration -Path &lt;String&gt; [-Scope &lt;SearchConfigurationScope&gt;] [-Web &lt;WebPipeBind&gt;]
+<pre><code class="lang-powershell">Set-PnPSearchConfiguration -Path &lt;String&gt; [-Scope &lt;SearchConfigurationScope&gt;] 
  [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
+<p>This cmdlet sets the search configuration for a single web, site collection or a tenant, using a file or a configuration string.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <pre><code class="lang-powershell">Set-PnPSearchConfiguration -Configuration $config
 </code></pre>
-<p>Sets the search configuration for the current web</p>
+<p>Sets the search configuration for the current web.</p>
 <h3 id="example-2">EXAMPLE 2</h3>
 <pre><code class="lang-powershell">Set-PnPSearchConfiguration -Configuration $config -Scope Site
 </code></pre>
-<p>Sets the search configuration for the current site collection</p>
+<p>Sets the search configuration for the current site collection.</p>
 <h3 id="example-3">EXAMPLE 3</h3>
 <pre><code class="lang-powershell">Set-PnPSearchConfiguration -Configuration $config -Scope Subscription
 </code></pre>
-<p>Sets the search configuration for the current tenant</p>
+<p>Sets the search configuration for the current tenant.</p>
 <h3 id="example-4">EXAMPLE 4</h3>
 <pre><code class="lang-powershell">Set-PnPSearchConfiguration -Path searchconfig.xml -Scope Subscription
 </code></pre>
-<p>Reads the search configuration from the specified XML file and sets it for the current tenant</p>
+<p>Reads the search configuration from the specified XML file and sets it for the current tenant.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-configuration">-Configuration</h3>
-<p>Search configuration string</p>
+<p>Search configuration string.</p>
 <pre><code class="lang-yaml">Type: String
 Parameter Sets: Config
 
@@ -135,7 +137,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-path">-Path</h3>
-<p>Path to a search configuration</p>
+<p>Path to a search configuration.</p>
 <pre><code class="lang-yaml">Type: String
 Parameter Sets: Path
 
@@ -146,20 +148,10 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-scope">-Scope</h3>
+<p>Scope to apply the setting to. The default is Web.</p>
 <pre><code class="lang-yaml">Type: SearchConfigurationScope
 Parameter Sets: (All)
 Accepted values: Web, Site, Subscription
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-web">-Web</h3>
-<p>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</p>
-<pre><code class="lang-yaml">Type: WebPipeBind
-Parameter Sets: (All)
 
 Required: False
 Position: Named
@@ -195,5 +187,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

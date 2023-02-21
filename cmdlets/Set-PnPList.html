@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Set-PnPList | PnP PowerShell ">
     <meta name="generator" content="docfx 2.51.0.0">
-    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work against Microsoft 365.">
+    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work with Microsoft 365.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
@@ -77,6 +77,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/powershell/blob/dev/documentation/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
@@ -90,9 +91,12 @@
  [-Hidden &lt;Boolean&gt;] [-ForceCheckout &lt;Boolean&gt;] [-ListExperience &lt;ListExperience&gt;]
  [-EnableAttachments &lt;Boolean&gt;] [-EnableFolderCreation &lt;Boolean&gt;] [-EnableVersioning &lt;Boolean&gt;]
  [-EnableMinorVersions &lt;Boolean&gt;] [-MajorVersions &lt;UInt32&gt;] [-MinorVersions &lt;UInt32&gt;]
- [-EnableModeration &lt;Boolean&gt;] [-Web &lt;WebPipeBind&gt;] [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
+ [-EnableModeration &lt;Boolean&gt;] [-DraftVersionVisibility &lt;DraftVisibilityType&gt;] [-ReadSecurity &lt;ListReadSecurity&gt;] [-WriteSecurity &lt;ListWriteSecurity&gt;]
+ [-NoCrawl] [-ExemptFromBlockDownloadOfNonViewableFiles &lt;Boolean&gt;] [-DisableGridEditing &lt;Boolean&gt;] [-DefaultSensitivityLabelForLibrary &lt;SensitivityLabelPipeBind&gt;]
+ [-Path &lt;String&gt;] [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
+<p>Allows the configuration of a specific SharePoint Online list to be set.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <pre><code class="lang-powershell">Set-PnPList -Identity &quot;Demo List&quot; -EnableContentTypes $true
@@ -118,9 +122,28 @@
 <pre><code class="lang-powershell">Set-PnPList -Identity &quot;Demo List&quot; -EnableAttachments $true
 </code></pre>
 <p>Turns on attachments on a list</p>
+<h3 id="example-7">EXAMPLE 7</h3>
+<pre><code class="lang-powershell">Set-PnPList -Identity &quot;Demo List&quot; -Title &quot;Demo List 2&quot; -Path &quot;Lists/DemoList2&quot;
+</code></pre>
+<p>Rename a list, including its' URL.</p>
+<h3 id="example-8">EXAMPLE 8</h3>
+<pre><code class="lang-powershell">Set-PnPList -Identity &quot;Demo List&quot; -DefaultSensitivityLabelForLibrary &quot;Confidential&quot;
+</code></pre>
+<p>Sets the default sensitivity label for a document library to Confidential.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-breakroleinheritance">-BreakRoleInheritance</h3>
-<p>If used the security inheritance is broken for this list</p>
+<p>If used the security inheritance is broken for this list from its parent, the web in which it resides. Permissions can be added using <a href="Set-PnPListPermission.html">Set-PnPListPermission</a>.</p>
+<pre><code class="lang-yaml">Type: SwitchParameter
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-resetroleinheritance">-ResetRoleInheritance</h3>
+<p>If used the security inheritance is reset for this list meaning it will not copy the permissions from its parent, but will start with an empty list of permissions. Permissions can be added using <a href="Set-PnPListPermission.html">Set-PnPListPermission</a>.</p>
 <pre><code class="lang-yaml">Type: SwitchParameter
 Parameter Sets: (All)
 
@@ -166,6 +189,17 @@ Accept wildcard characters: False
 <h3 id="-description">-Description</h3>
 <p>The description of the list</p>
 <pre><code class="lang-yaml">Type: String
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-defaultsensitivitylabelforlibrary">-DefaultSensitivityLabelForLibrary</h3>
+<p>The instance, Id or name of the sensitivity label to set as the default for the library. If $null is provided, the default label will be removed.</p>
+<pre><code class="lang-yaml">Type: SensitivityLabelPipeBind
 Parameter Sets: (All)
 
 Required: False
@@ -223,6 +257,17 @@ Accept wildcard characters: False
 <pre><code class="lang-yaml">Type: Boolean
 Parameter Sets: (All)
 
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-draftversionvisibility">-DraftVersionVisibility</h3>
+<p>Specify which users should be able to view drafts in this list.</p>
+<pre><code class="lang-yaml">Type: DraftVisibilityType
+Parameter Sets: (All)
+Accepted values: Approver, Author, Reader
 Required: False
 Position: Named
 Default value: None
@@ -297,7 +342,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-minorversions">-MinorVersions</h3>
-<p>Maximum minor versions to keep</p>
+<p>Maximum major versions for which to keep minor versions</p>
 <pre><code class="lang-yaml">Type: UInt32
 Parameter Sets: (All)
 
@@ -307,11 +352,22 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
-<h3 id="-resetroleinheritance">-ResetRoleInheritance</h3>
-<p>If used the security inheritance is reset for this list (inherited from parent)</p>
-<pre><code class="lang-yaml">Type: SwitchParameter
+<h3 id="-readsecurity">-ReadSecurity</h3>
+<p>Sets the read security for the list</p>
+<pre><code class="lang-yaml">Type: ListReadSecurity
 Parameter Sets: (All)
-
+Accepted values: AllUsersReadAccess, AllUsersReadAccessOnItemsTheyCreate
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-writesecurity">-WriteSecurity</h3>
+<p>Sets the write security for the list</p>
+<pre><code class="lang-yaml">Type: ListWriteSecurity
+Parameter Sets: (All)
+Accepted values: WriteAllItems, WriteOnlyMyItems, WriteNoItems
 Required: False
 Position: Named
 Default value: None
@@ -329,9 +385,42 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
-<h3 id="-web">-Web</h3>
-<p>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</p>
-<pre><code class="lang-yaml">Type: WebPipeBind
+<h3 id="-nocrawl">-NoCrawl</h3>
+<p>Switch parameter if this list should be indexed in search.</p>
+<pre><code class="lang-yaml">Type: SwitchParameter
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-exemptfromblockdownloadofnonviewablefiles">-ExemptFromBlockDownloadOfNonViewableFiles</h3>
+<p>Allows to configure access capabilities for unmanaged devices for the list. If set to $true, the list will be accessible by unmanaged devices as well. For more information, see <a href="https://learn.microsoft.com/sharepoint/control-access-from-unmanaged-devices">SharePoint and OneDrive unmanaged device access controls for administrators</a>.</p>
+<pre><code class="lang-yaml">Type: Boolean
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-disablegridediting">-DisableGridEditing</h3>
+<p>Enable or disable whether edit grid editing is enabled for the list. Set to $true to disable, $false to enable.</p>
+<pre><code class="lang-yaml">Type: Boolean
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-path">-Path</h3>
+<p>The new URL path of the list. The parent folder must exist and be in the same site/web. I.e. lists\newname.</p>
+<pre><code class="lang-yaml">Type: String
 Parameter Sets: (All)
 
 Required: False
@@ -368,5 +457,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

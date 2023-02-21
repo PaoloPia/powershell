@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Set-PnPTerm | PnP PowerShell ">
     <meta name="generator" content="docfx 2.51.0.0">
-    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work against Microsoft 365.">
+    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work with Microsoft 365.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
@@ -77,6 +77,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                <div class="pnp_tags">Available in the current Nightly Release only.</div>
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/powershell/blob/dev/documentation/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
@@ -88,30 +89,34 @@
 <h3 id="by-term-id">By Term Id</h3>
 <pre><code>Set-PnPTerm -Identity &lt;Guid&gt; [-Name &lt;String&gt;] [-Lcid &lt;Int32&gt;] [-Description &lt;String&gt;]
  [-CustomProperties &lt;Hashtable&gt;] [-LocalCustomProperties &lt;Hashtable&gt;] [-DeleteAllCustomProperties]
- [-DeleteAllLocalCustomProperties] [-TermStore &lt;TaxonomyTermStorePipeBind&gt;]
+ [-DeleteAllLocalCustomProperties] [-Deprecated &lt;bool&gt;] [-TermStore &lt;TaxonomyTermStorePipeBind&gt;]
  [&lt;CommonParameters&gt;]
 </code></pre>
 <h3 id="by-term-name">By Term Name</h3>
 <pre><code>Set-PnPTerm -Identity &lt;String&gt; [-Name &lt;String&gt;] [-Lcid &lt;Int32&gt;] [-Description &lt;String&gt;]
  [-CustomProperties &lt;Hashtable&gt;] [-LocalCustomProperties &lt;Hashtable&gt;] [-DeleteAllCustomProperties]
- [-DeleteAllLocalCustomProperties] -TermSet &lt;TaxonomyTermSetPipeBind&gt; -TermGroup &lt;TaxonomyTermGroupPipeBind&gt;
+ [-DeleteAllLocalCustomProperties] [-Deprecated &lt;bool&gt;] -TermSet &lt;TaxonomyTermSetPipeBind&gt; -TermGroup &lt;TaxonomyTermGroupPipeBind&gt;
  [-TermStore &lt;TaxonomyTermStorePipeBind&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
 <p>This cmdlet allows you to update an existing term.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">Example 1</h3>
-<pre><code class="lang-powershell">Update-PnPTerm -Identity 3d9e60e8-d89c-4cd4-af61-a010cf93b380 -Name &quot;New Name&quot;
+<pre><code class="lang-powershell">Set-PnPTerm -Identity 3d9e60e8-d89c-4cd4-af61-a010cf93b380 -Name &quot;New Name&quot;
 </code></pre>
 <p>Replaces the name of an existing term.</p>
 <h3 id="example-2">Example 2</h3>
-<pre><code class="lang-powershell">Update-TermSet -Identity &quot;Marketing&quot; -TermSet &quot;Departments&quot; -TermGroup &quot;Corporate&quot; -Name &quot;Finance&quot; -CustomProperties @{&quot;IsCorporate&quot;=&quot;True&quot;}
+<pre><code class="lang-powershell">Set-PnPTerm -Identity &quot;Marketing&quot; -TermSet &quot;Departments&quot; -TermGroup &quot;Corporate&quot; -Name &quot;Finance&quot; -CustomProperties @{&quot;IsCorporate&quot;=&quot;True&quot;}
 </code></pre>
 <p>Adds a new custom property to an existing term.</p>
-<h3 id="example-2-1">Example 2</h3>
-<pre><code class="lang-powershell">Update-TermSet -Identity &quot;Marketing&quot; -TermSet &quot;Departments&quot; -TermGroup &quot;Corporate&quot; -Name &quot;Finance&quot; -DeleteAllCustomProperties -CustomProperties @{&quot;IsCorporate&quot;=&quot;True&quot;}
+<h3 id="example-3">Example 3</h3>
+<pre><code class="lang-powershell">Set-PnPTerm -Identity &quot;Marketing&quot; -TermSet &quot;Departments&quot; -TermGroup &quot;Corporate&quot; -Name &quot;Finance&quot; -DeleteAllCustomProperties -CustomProperties @{&quot;IsCorporate&quot;=&quot;True&quot;}
 </code></pre>
 <p>Removes all custom properties and adds a new custom property to an existing term.</p>
+<h3 id="example-4">Example 4</h3>
+<pre><code class="lang-powershell">Set-TermSet -Identity &quot;Marketing&quot; -TermSet &quot;Departments&quot; -TermGroup &quot;Corporate&quot; -Deprecated $true
+</code></pre>
+<p>Marks an existing term as deprecated, hiding it from users.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-customproperties">-CustomProperties</h3>
 <p>Sets custom properties.</p>
@@ -152,6 +157,18 @@ Accept wildcard characters: False
 <h3 id="-description">-Description</h3>
 <p>Sets the description for a term.</p>
 <pre><code class="lang-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-deprecated">-Deprecated</h3>
+<p>Sets a term as deprecated or not.</p>
+<pre><code class="lang-yaml">Type: boolean
 Parameter Sets: (All)
 Aliases:
 
@@ -273,5 +290,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

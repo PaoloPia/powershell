@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Set-PnPMicrosoft365Group | PnP PowerShell ">
     <meta name="generator" content="docfx 2.51.0.0">
-    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work against Microsoft 365.">
+    <meta name="description" content="PnP PowerShell is an open source, community driven, PowerShell Module designed to work with Microsoft 365.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
@@ -77,6 +77,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/powershell/blob/dev/documentation/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
@@ -90,11 +91,12 @@
 <p>Sets Microsoft 365 Group properties</p>
 <h2 id="syntax">SYNTAX</h2>
 <pre><code class="lang-powershell">Set-PnPMicrosoft365Group -Identity &lt;Microsoft365GroupPipeBind&gt; [-DisplayName &lt;String&gt;] [-Description &lt;String&gt;]
- [-Owners &lt;String[]&gt;] [-Members &lt;String[]&gt;] [-IsPrivate] [-GroupLogoPath &lt;String&gt;] [-CreateTeam]
- [-HideFromAddressLists &lt;Boolean&gt;] [-HideFromOutlookClients &lt;Boolean&gt;] [-ByPassPermissionCheck]
+ [-Owners &lt;String[]&gt;] [-Members &lt;String[]&gt;] [-IsPrivate] [-LogoPath &lt;String&gt;] [-CreateTeam]
+ [-HideFromAddressLists &lt;Boolean&gt;] [-HideFromOutlookClients &lt;Boolean&gt;] [-SensitivityLabels &lt;GUID[]&gt;]
  [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
+<p>Allows to modify Microsoft 365 Group.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <pre><code class="lang-powershell">Set-PnPMicrosoft365Group -Identity $group -DisplayName &quot;My Displayname&quot;
@@ -116,18 +118,11 @@
 <pre><code class="lang-powershell">Set-PnPMicrosoft365Group -Identity $group -Owners demo@contoso.com
 </code></pre>
 <p>Sets demo@contoso.com as owner of the group</p>
-<h2 id="parameters">PARAMETERS</h2>
-<h3 id="-bypasspermissioncheck">-ByPassPermissionCheck</h3>
-<p>Allows the check for required permissions in the access token to be bypassed when set to $true</p>
-<pre><code class="lang-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+<h3 id="example-6">EXAMPLE 6</h3>
+<pre><code class="lang-powershell">Set-PnPMicrosoft365Group -Identity $group -SensitivityLabels &quot;bc98af29-59eb-4869-baaa-9a8dff631aa4&quot;
 </code></pre>
+<p>Sets the sensitivity label of the group</p>
+<h2 id="parameters">PARAMETERS</h2>
 <h3 id="-createteam">-CreateTeam</h3>
 <p>Creates a Microsoft Teams team associated with created group</p>
 <pre><code class="lang-yaml">Type: SwitchParameter
@@ -161,7 +156,7 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
-<h3 id="-grouplogopath">-GroupLogoPath</h3>
+<h3 id="-logopath">-LogoPath</h3>
 <p>The path to the logo file of to set. Logo must be at least 48 pixels wide and may be at most 4 MB in size. Requires Site.ReadWrite.All permissions.</p>
 <pre><code class="lang-yaml">Type: String
 Parameter Sets: (All)
@@ -173,7 +168,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-hidefromaddresslists">-HideFromAddressLists</h3>
-<p>{{ Fill HideFromAddressLists Description }}</p>
+<p>Controls whether the group is hidden or shown in the Global Address List (GAL).</p>
 <pre><code class="lang-yaml">Type: Boolean
 Parameter Sets: (All)
 
@@ -184,7 +179,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-hidefromoutlookclients">-HideFromOutlookClients</h3>
-<p>{{ Fill HideFromOutlookClients Description }}</p>
+<p>Controls whether the group shows in the Outlook left-hand navigation.</p>
 <pre><code class="lang-yaml">Type: Boolean
 Parameter Sets: (All)
 
@@ -238,8 +233,19 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
+<h3 id="-sensitivitylabels">-SensitivityLabels</h3>
+<p>The Sensitivity label to be set to the Microsoft 365 Group. To retrieve the sensitivity label you need to use the Graph API mentioned <a href="https://learn.microsoft.com/en-us/graph/api/informationprotectionlabel-get?view=graph-rest-beta&amp;tabs=http">here</a>.</p>
+<pre><code class="lang-yaml">Type: GUID[]
+Parameter Sets: (All)
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
 <h2 id="related-links">RELATED LINKS</h2>
-<p><a href="https://aka.ms/m365pnp">Microsoft 365 Patterns and Practices</a><a href="https://docs.microsoft.com/graph/api/group-update">Documentation</a></p>
+<p><a href="https://aka.ms/m365pnp">Microsoft 365 Patterns and Practices</a>
+<a href="https://learn.microsoft.com/graph/api/group-update">Microsoft Graph documentation</a></p>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
@@ -266,5 +272,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>
