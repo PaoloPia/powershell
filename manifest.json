@@ -5271,6 +5271,19 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "cmdlets/Remove-PnPEntraIDUser.md",
+      "output": {
+        ".html": {
+          "relative_path": "cmdlets/Remove-PnPEntraIDUser.html"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "cmdlets/Remove-PnPEventReceiver.md",
       "output": {
